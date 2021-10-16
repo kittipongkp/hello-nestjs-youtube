@@ -8,18 +8,25 @@ export class UserController {
 
   //HTTP GET/users
   @Get()
-  getUser(email: string): User {
+  getUsers(): User[] {
+    return this.userService.getUsers();
+  }
+
+  @Get('/:email')
+  getUser(@Param('email') email: string):  User[] {
+    //console.log("Email:", email);
     return this.userService.getUser(email);
   }
 
   //HTTP POST/users
   @Post()
   postUser(@Body() user:User): User {
+    //console.log("User Body: ",user);
     return this.userService.addUser(user);
   }
 
   //HTTP DELETE/users
-  @Delete(':email')
+  @Delete('/:email')
   deleteUser(@Param('email') email:string): User[] {
     return this.userService.deleteUser(email);
   }
